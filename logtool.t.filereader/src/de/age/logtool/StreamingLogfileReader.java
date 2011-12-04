@@ -43,7 +43,7 @@ public class StreamingLogfileReader {
 					int endOfLine = buffer.indexOf("\n");
 					if (endOfLine >= 0) {
 						fireEvent(buffer.substring(0, endOfLine));
-						buffer.delete(0, endOfLine);
+						buffer.delete(0, endOfLine + 1);
 					}
 				} catch (IOException e) {
 					throw new RuntimeException();
