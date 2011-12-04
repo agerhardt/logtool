@@ -40,6 +40,7 @@ public class FileCreator {
 		}
 		try {
 			writer.append(contentCreator.createContent());
+			writer.flush();
 		} catch (IOException e) {
 			handleException(e);
 		}

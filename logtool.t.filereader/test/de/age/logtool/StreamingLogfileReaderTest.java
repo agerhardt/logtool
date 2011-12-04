@@ -59,10 +59,11 @@ public class StreamingLogfileReaderTest {
 	}
 	
 	@Test
-	public void changesToFileFireEvent() {
+	public void changesToFileFireEvent() throws InterruptedException {
 		StreamingLogfileReader reader = new StreamingLogfileReader(tempFile);
 		reader.addLogfileListener(listener);
 		source.append();
+		Thread.sleep(10000);
 		assertThat(listener.getNumberOFLines(), is(1));
 	}
 
