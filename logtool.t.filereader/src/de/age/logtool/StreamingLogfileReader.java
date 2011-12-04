@@ -56,7 +56,7 @@ public class StreamingLogfileReader {
 				}
 			}
 		};
-		timer.schedule(updateLogTask, 1500, 200);
+		timer.schedule(updateLogTask, 0, 200);
 	}
 	
 	public void addLogfileListener(LogfileListener listener) {

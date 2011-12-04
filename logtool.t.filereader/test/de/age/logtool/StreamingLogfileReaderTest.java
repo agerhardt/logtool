@@ -63,7 +63,7 @@ public class StreamingLogfileReaderTest {
 		StreamingLogfileReader reader = new StreamingLogfileReader(tempFile);
 		reader.addLogfileListener(listener);
 		source.append();
-		Thread.sleep(10000);
+		Thread.sleep(500);
 		assertThat(listener.getNumberOFLines(), is(1));
 	}
 
