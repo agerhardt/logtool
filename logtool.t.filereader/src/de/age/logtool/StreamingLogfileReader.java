@@ -6,35 +6,45 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimerTask;
 
+import de.age.logtool.exceptions.IllegalLogfileListenerException;
 import de.age.logtool.util.TrackingLogfileListener;
 
-public class StreamingLogfileReader extends TimerTask {
+public class StreamingLogfileReader {
 	private static final int BUFFER_SIZE = 1024;
 	
 	private final StringBuilder savedResult = new StringBuilder();
 	private final char[] buffer;
 	private long position;
 	private long lastModification;
+	private long lastSize;
 	private final List<LogfileListener> listeners;
 	private final File file;
 
 	public StreamingLogfileReader(File file) {
+		if (file == null) {
+			throw new NullPointerException("File must not be <null>");
+		}
 		this.file = file;
 		buffer = new char[BUFFER_SIZE];
 		lastModification = -1;
+		lastSize = 0;
 		position = 0;
 		listeners = new ArrayList<LogfileListener>();
 	}
 
-	@Override
-	public void run() {
-		long modificationTime = file.lastModified();
-		if (file.exists() && modificationTime > lastModification) {
-			lastModification = modificationTime;
+	public void checkFileForUpdates() {
+		if (file.exists() && fileWasModified()) {
+			lastModification = file.lastModified();
+			lastSize = file.length();
 			readNewDataFromFile();
 		}
+	}
+
+	private boolean fileWasModified() {
+		long newModificationTime = file.lastModified();
+		long newSize = file.length();
+		return newModificationTime > lastModification || newSize > lastSize;
 	}
 
 	private void readNewDataFromFile() {
@@ -72,6 +82,9 @@ public class StreamingLogfileReader extends TimerTask {
 	}
 
 	public void addLogfileListener(TrackingLogfileListener listener) {
+		if (listener == null) {
+			throw IllegalLogfileListenerException.nullListener();
+		}
 		this.listeners.add(listener);
 	}
 }
