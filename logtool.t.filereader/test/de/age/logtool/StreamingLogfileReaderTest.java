@@ -7,8 +7,6 @@ import static org.junit.Assert.assertThat;
 import java.io.File;
 import java.util.List;
 
-import org.hamcrest.BaseMatcher;
-import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Before;
@@ -16,19 +14,20 @@ import org.junit.Test;
 
 import de.age.logtool.exceptions.IllegalLogfileListenerException;
 import de.age.logtool.util.FileCreator;
-import de.age.logtool.util.TrackingContentCreator;
+import de.age.logtool.util.StringContentCreator;
 import de.age.logtool.util.TrackingLogfileListener;
+import de.age.testtools.TrackingContentCreator;
 
 public class StreamingLogfileReaderTest {
 
-	private TrackingContentCreator content;
+	private TrackingContentCreator<String> content;
 	private FileCreator source;
 	private File tempFile;
 	private TrackingLogfileListener listener;
 	
 	@Before
 	public void setUp() throws Throwable {
-		content = new TrackingContentCreator();
+		content = new StringContentCreator();
 		tempFile = File.createTempFile("temptest", "log");
 		source = new FileCreator(tempFile.getAbsolutePath(), content);
 		listener = new TrackingLogfileListener();
@@ -81,7 +80,7 @@ public class StreamingLogfileReaderTest {
 		reader.addLogfileListener(listener);
 		source.append();
 		reader.checkFileForUpdates();
-		assertThat(listener, is(matchingContent()));
+		assertThat(listener.getLines(), is(matchingContent()));
 	}
 	
 	@Test
@@ -92,7 +91,7 @@ public class StreamingLogfileReaderTest {
 		reader.addLogfileListener(listener);
 		source.append();
 		reader.checkFileForUpdates();
-		assertThat(listener, is(matchingContent(1)));
+		assertThat(listener.getLines(), is(matchingContent(1)));
 	}
 	
 	@Test
@@ -110,51 +109,16 @@ public class StreamingLogfileReaderTest {
 		source.append();
 		source.append();
 		reader.checkFileForUpdates();
-		assertThat(listener, is(matchingContent()));
+		assertThat(listener.getLines(), is(matchingContent()));
 	}
 	
-	private Matcher<TrackingLogfileListener> matchingContent() {
-		return new ContentMatcher(0);
+	private Matcher<List<String>> matchingContent() {
+		return content.matcher();
 	}
 	
 	
-	private Matcher<TrackingLogfileListener> matchingContent(int startingOffset) {
-		return new ContentMatcher(startingOffset);
-	}
-	
-	private final class ContentMatcher extends BaseMatcher<TrackingLogfileListener> {
-
-		private final int startingOffset;
-		
-		public ContentMatcher(int startingOffset) {
-			this.startingOffset = startingOffset;
-		}
-		
-		@Override
-		public boolean matches(Object item) {
-			if (item instanceof TrackingLogfileListener) {
-				TrackingLogfileListener itemAsListener = (TrackingLogfileListener) item;
-				if (itemAsListener.getNumberOFLines() != content.getNumberOfEntries() - startingOffset) {
-					return false;
-				}
-				List<String> listenerLines = itemAsListener.getLines();
-				List<String> contentEntries = content.getEntries();
-				for (int i = 0; i < itemAsListener.getNumberOFLines(); i++) {
-					if (!listenerLines.get(i).equals(contentEntries.get(i + startingOffset))) {
-						return false;
-					}
-				}
-				return itemAsListener.getNumberOFLines() == content.getNumberOfEntries() - startingOffset;
-			} else {
-				return false;
-			}
-		}
-
-		@Override
-		public void describeTo(Description description) {
-			description.appendDescriptionOf(content);
-		}
-		
+	private Matcher<List<String>> matchingContent(int startingOffset) {
+		return content.matcher(startingOffset);
 	}
 	
 }
