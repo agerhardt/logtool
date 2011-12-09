@@ -20,27 +20,36 @@ public abstract class TrackingContentCreator<T> {
 	}
 	
 	public Matcher<List<T>> matcher() {
-		return new ContentMatcher(0);
+		return new ContentMatcher(0, trackedContent.size());
 	}
 	
 	public Matcher<List<T>> matcher(int startingOffset) {
-		return new ContentMatcher(startingOffset);
+		return new ContentMatcher(startingOffset, trackedContent.size() - startingOffset);
+	}
+	
+	public Matcher<List<T>> matcher(int startingOffset, int length) {
+		return new ContentMatcher(startingOffset, length);
 	}
 
 	private final class ContentMatcher extends BaseMatcher<List<T>> {
 
 		private final int startingOffset;
+		private final int length;
 		
-		public ContentMatcher(int startingOffset) {
+		public ContentMatcher(int startingOffset, int length) {
 			super();
+			if (startingOffset + length > trackedContent.size()) {
+				throw new IllegalArgumentException("Length exceeds content");
+			}
 			this.startingOffset = startingOffset;
+			this.length = length;
 		}
 
 		@Override
 		public boolean matches(Object item) {
 			if (item instanceof List<?>) {
 				List<?> list = (List<?>) item;
-				if (list.size() != trackedContent.size() - startingOffset) {
+				if (list.size() != length) {
 					return false;
 				}
 				for (int i = 0; i < list.size(); i++) {
@@ -56,7 +65,7 @@ public abstract class TrackingContentCreator<T> {
 
 		@Override
 		public void describeTo(Description description) {
-			description.appendValue(trackedContent);
+			description.appendValue(trackedContent.subList(startingOffset, startingOffset + length));
 		}
 	}
 	
