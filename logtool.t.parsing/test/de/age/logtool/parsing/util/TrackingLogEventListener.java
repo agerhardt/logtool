@@ -18,23 +18,8 @@ public class TrackingLogEventListener implements LogEventListener {
 		events.add(new TrackedEvent(time, content));
 	}
 	
-	public static class TrackedEvent {
-		private final long timestamp;
-		private final String content;
-		
-		public TrackedEvent(long timestamp, String content) {
-			super();
-			this.timestamp = timestamp;
-			this.content = content;
-		}
-
-		public long getTimestamp() {
-			return timestamp;
-		}
-
-		public String getContent() {
-			return content;
-		}
+	public List<TrackedEvent> getEvents() {
+		return events;
 	}
 
 }

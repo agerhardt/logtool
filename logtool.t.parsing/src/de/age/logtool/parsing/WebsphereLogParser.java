@@ -1,12 +1,16 @@
 package de.age.logtool.parsing;
 
+import java.text.SimpleDateFormat;
+
 
 public class WebsphereLogParser extends AbstractLogParser {
 
+	private SimpleDateFormat format;
 	private StringBuilder buffer;
 	
 	public WebsphereLogParser() {
 		buffer = new StringBuilder();
+		format = new SimpleDateFormat();
 	}
 	
 	@Override
