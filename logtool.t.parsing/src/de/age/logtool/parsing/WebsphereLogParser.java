@@ -13,7 +13,7 @@ public class WebsphereLogParser extends AbstractLogParser {
 	private StringBuilder buffer;
 	
 	public WebsphereLogParser() {
-		pattern = Pattern.compile("\\[\\d[2]\\.\\d[2]\\.\\d[2] \\d[2]:\\d[2]:\\d[2]:\\d[3] CET\\].*");
+		pattern = Pattern.compile("\\[\\d{2}.\\d{2}.\\d{4} \\d{2}:\\d{2}:\\d{2}:\\d{3} CET].*");
 		buffer = new StringBuilder();
 	}
 	
@@ -35,13 +35,13 @@ public class WebsphereLogParser extends AbstractLogParser {
 	 */
 	private void flushBuffer() {
 		if (pattern.matcher(buffer.toString()).find()) {
-		try {
-			Date parse = FORMAT.parse(buffer.substring(1, 24));
-			fireLogEvent(parse.getTime(), buffer.toString());
-		} catch (ParseException e) {
-			// TODO
-			throw new RuntimeException();
-		}
+			try {
+				Date parse = FORMAT.parse(buffer.substring(1, 24));
+				fireLogEvent(parse.getTime(), buffer.toString());
+			} catch (ParseException e) {
+				// TODO
+				throw new RuntimeException();
+			}
 		}
 		buffer = new StringBuilder();
 	}
