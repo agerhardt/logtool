@@ -51,4 +51,11 @@ public class WebsphereLogParserTest {
 		assertThat(listener.getEvents(), is(content.matcher(0, 1)));
 	}
 	
+	@Test
+	public void illegalContentAtStartGetsIgnored() {
+		parser.parse("Illegal Content");
+		parser.parse(content.create().getContent());
+		assertThat(listener.getNumberOfEvents(), is(0));
+	}
+	
 }
