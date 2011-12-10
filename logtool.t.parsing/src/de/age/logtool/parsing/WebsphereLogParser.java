@@ -1,16 +1,17 @@
 package de.age.logtool.parsing;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class WebsphereLogParser extends AbstractLogParser {
 
-	private SimpleDateFormat format;
+	private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss:SSS");
 	private StringBuilder buffer;
 	
 	public WebsphereLogParser() {
 		buffer = new StringBuilder();
-		format = new SimpleDateFormat();
 	}
 	
 	@Override
@@ -30,7 +31,13 @@ public class WebsphereLogParser extends AbstractLogParser {
 	 * Parses the current content of the buffer as one event and fires that event.
 	 */
 	private void flushBuffer() {
-		fireLogEvent(0, buffer.toString());
+		try {
+			Date parse = FORMAT.parse(buffer.substring(1, 24));
+			fireLogEvent(parse.getTime(), buffer.toString());
+		} catch (ParseException e) {
+			// TODO
+			throw new RuntimeException();
+		}
 		buffer = new StringBuilder();
 	}
 
