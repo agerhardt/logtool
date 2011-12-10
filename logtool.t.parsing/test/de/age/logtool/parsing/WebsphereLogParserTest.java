@@ -58,4 +58,8 @@ public class WebsphereLogParserTest {
 		assertThat(listener.getNumberOfEvents(), is(0));
 	}
 	
+	@Test
+	public void multiLineContent() {
+	}
+	
 }
