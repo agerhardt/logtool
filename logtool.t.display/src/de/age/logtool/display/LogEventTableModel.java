@@ -20,6 +20,11 @@ public class LogEventTableModel extends AbstractTableModel {
 		events = new ArrayList<DisplayLogEvent>();
 	}
 	
+	public void addLogEvent(DisplayLogEvent event) {
+		events.add(event);
+		fireTableRowsInserted(events.size() - 1, events.size() - 1);
+	}
+	
 	@Override
 	public int getRowCount() {
 		return events.size();
