@@ -1,2 +1,6 @@
 - im sure the logtool.r.parsing project actually is business logic, so need to rename it from logtool.t... to logtool.r...
-- add actual functionality to logtool.r... components through CDI, so i can test UI stuff
+
+CDI:
+    just for understanding this right ... i think the modules in CDI are not necessarily implemented client-side to kinda
+    "piece together" the application, but might be better off in the modules (in a project sense) and wrap up basically everything
+    this project/module does in a tight little package
