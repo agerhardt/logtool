@@ -1,5 +1,6 @@
 package de.age.logtool.parsing;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -60,6 +61,13 @@ public class WebsphereLogParserTest {
 	
 	@Test
 	public void multiLineContent() {
+		String line1 = content.create().getContent();
+		String line2 = "Second line";
+		parser.parse(line1);
+		parser.parse(line2);
+		parser.parse(content.create().getContent());
+		assertThat(listener.getNumberOfEvents(), is(1));
+		assertThat(listener.getEvents().get(0).getContent(), is(equalTo(line1 + line2)));
 	}
 	
 }

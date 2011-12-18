@@ -26,14 +26,14 @@ public class WebsphereLogParser extends AbstractLogParser {
 	}
 
 	private boolean isInputWithTimestamp(String input) {
-		return input.startsWith("[") && input.indexOf("]") > 0;
+		return PATTERN.matcher(input).find();
 	}
 	
 	/**
 	 * Parses the current content of the buffer as one event and fires that event.
 	 */
 	private void flushBuffer() {
-		if (PATTERN.matcher(buffer.toString()).find()) {
+		if (isInputWithTimestamp(buffer.toString())) {
 			try {
 				Date parse = FORMAT.parse(buffer.substring(1, 24));
 				fireLogEvent(parse.getTime(), buffer.toString());
