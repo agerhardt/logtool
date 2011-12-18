@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class WebsphereLogParser extends AbstractLogParser {
 
 	private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss:SSS");
-	private static final Pattern PATTERN = Pattern.compile("\\[\\d{2}.\\d{2}.\\d{4} \\d{2}:\\d{2}:\\d{2}:\\d{3} CET].*");
+	private static final Pattern PATTERN = Pattern.compile("\\[\\d{2}\\.\\d{2}\\.\\d{4} \\d{2}:\\d{2}:\\d{2}:\\d{3} CET\\].*");
 	private StringBuilder buffer;
 	
 	public WebsphereLogParser() {
