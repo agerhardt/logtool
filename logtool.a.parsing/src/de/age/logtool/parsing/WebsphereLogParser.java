@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class WebsphereLogParser extends AbstractLogParser {
 
 	private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss:SSS");
-	private static final Pattern pattern = Pattern.compile("\\[\\d{2}\\.\\d{2}\\.\\d{4} \\d{2}:\\d{2}:\\d{2}:\\d{3} CET\\].*");
+	private static final Pattern PATTERN = Pattern.compile("\\[\\d{2}\\.\\d{2}\\.\\d{4} \\d{2}:\\d{2}:\\d{2}:\\d{3} CET\\].*");
 	private StringBuilder buffer;
 	
 	public WebsphereLogParser() {
@@ -26,21 +26,21 @@ public class WebsphereLogParser extends AbstractLogParser {
 	}
 
 	private boolean isInputWithTimestamp(String input) {
-		return pattern.matcher(input).find();
+		return PATTERN.matcher(input).find();
 	}
 	
 	/**
 	 * Parses the current content of the buffer as one event and fires that event.
 	 */
 	private void flushBuffer() {
-		if (pattern.matcher(buffer.toString()).find()) {
-		try {
-			Date parse = FORMAT.parse(buffer.substring(1, 24));
-			fireLogEvent(parse.getTime(), buffer.toString());
-		} catch (ParseException e) {
-			// TODO
-			throw new RuntimeException();
-		}
+		if (isInputWithTimestamp(buffer.toString())) {
+			try {
+				Date parse = FORMAT.parse(buffer.substring(1, 24));
+				fireLogEvent(parse.getTime(), buffer.toString());
+			} catch (ParseException e) {
+				// TODO
+				throw new RuntimeException();
+			}
 		}
 		buffer = new StringBuilder();
 	}
