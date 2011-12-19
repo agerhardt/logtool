@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.age.logtool.display.swing.LogEventTableModel;
 import de.age.logtool.display.util.TrackingTableModelListener;
 
 public class LogEventTableModelTest {

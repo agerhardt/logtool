@@ -1,4 +1,4 @@
-package de.age.logtool.display;
+package de.age.logtool.display.swing;
 
 import java.awt.Component;
 

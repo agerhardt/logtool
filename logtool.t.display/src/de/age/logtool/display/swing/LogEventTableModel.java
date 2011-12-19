@@ -1,10 +1,12 @@
-package de.age.logtool.display;
+package de.age.logtool.display.swing;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
+
+import de.age.logtool.display.DisplayLogEvent;
 
 public class LogEventTableModel extends AbstractTableModel {
 
