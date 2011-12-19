@@ -2,6 +2,7 @@ package de.age.logtool;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 
@@ -54,6 +55,57 @@ public class LogEntryTest {
 		LogContent content = new LogContent();
 		LogEntry entry = new LogEntry(ts, content);
 		assertThat(entry.getContent(), is(sameInstance(content)));
+	}
+
+	@Test
+	public void entriesWithSameTimestampAndContentAreEqual() {
+		Timestamp ts = Timestamp.current();
+		LogContent content = new LogContent();
+		LogEntry entry1 = new LogEntry(ts, content);
+		LogEntry entry2 = new LogEntry(ts, content);
+		assertThat(entry1, is(equalTo(entry2)));
+	}
+	
+	@Test
+	public void entriesWithEqualTimestampAndContentAreEqual() {
+		Timestamp ts1 = new Timestamp(100);
+		Timestamp ts2 = new Timestamp(100);
+		LogContent content1 = new LogContent();
+		LogContent content2 = content1; // TODO
+		LogEntry entry1 = new LogEntry(ts1, content1);
+		LogEntry entry2 = new LogEntry(ts2, content2);
+		assertThat(entry1, is(equalTo(entry2)));
+	}
+	
+	@Test
+	public void entriesWithDifferentTimestampsAreNotEqual() {
+		Timestamp ts1 = new Timestamp(100);
+		Timestamp ts2 = new Timestamp(200);
+		LogContent content = new LogContent();
+		LogEntry entry1 = new LogEntry(ts1, content);
+		LogEntry entry2 = new LogEntry(ts2, content);
+		assertThat(entry1, is(not(equalTo(entry2))));
+	}
+	
+	@Test
+	public void entriesWithDifferentContentAreNotEqual() {
+		Timestamp ts = Timestamp.current();
+		LogContent content1 = new LogContent();
+		LogContent content2 = new LogContent();
+		LogEntry entry1 = new LogEntry(ts, content1);
+		LogEntry entry2 = new LogEntry(ts, content2);
+		assertThat(entry1, is(not(equalTo(entry2))));
+	}
+	
+	@Test
+	public void equalEntriesHaveSameHashcode() {
+		Timestamp ts1 = new Timestamp(100);
+		Timestamp ts2 = new Timestamp(100);
+		LogContent content1 = new LogContent();
+		LogContent content2 = content1; // TODO
+		LogEntry entry1 = new LogEntry(ts1, content1);
+		LogEntry entry2 = new LogEntry(ts2, content2);
+		assertThat(entry1.hashCode(), is(equalTo(entry2.hashCode())));
 	}
 
 }

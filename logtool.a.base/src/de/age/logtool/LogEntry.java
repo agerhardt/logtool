@@ -28,4 +28,20 @@ public class LogEntry {
 	public LogContent getContent() {
 		return content;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof LogEntry) {
+			LogEntry other = (LogEntry) obj;
+			return getTimestamp().equals(other.getTimestamp()) && getContent().equals(other.getContent());
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		return (timestamp.hashCode() >>> 2) ^ content.hashCode();
+	}
+	
 }
