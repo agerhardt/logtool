@@ -25,6 +25,14 @@ public class TimestampTest {
 	}
 	
 	@Test
+	public void timestampsWithDifferentTimeAreNotEqual() {
+		long time = 5000000;
+		Timestamp ts1 = new Timestamp(time);
+		Timestamp ts2 = new Timestamp(time + 1);
+		assertThat(ts1, is(not(equalTo(ts2))));
+	}
+	
+	@Test
 	public void equalTimestampsHaveSameHashcode() {
 		long time = 5000000;
 		Timestamp ts1 = new Timestamp(time);
