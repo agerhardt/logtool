@@ -3,22 +3,23 @@ package de.age.logtool.parsing.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.age.logtool.LogEntry;
 import de.age.logtool.parsing.LogEventListener;
 
 public class TrackingLogEventListener implements LogEventListener {
 
-	private List<TrackedEvent> events = new ArrayList<TrackedEvent>();
+	private List<LogEntry> events = new ArrayList<LogEntry>();
 	
 	public Integer getNumberOfEvents() {
 		return events.size();
 	}
 
 	@Override
-	public void logEvent(long time, String content) {
-		events.add(new TrackedEvent(time, content));
+	public void logEvent(LogEntry event) {
+		events.add(event);
 	}
 	
-	public List<TrackedEvent> getEvents() {
+	public List<LogEntry> getEvents() {
 		return events;
 	}
 

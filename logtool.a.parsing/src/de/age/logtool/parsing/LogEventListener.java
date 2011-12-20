@@ -1,7 +1,9 @@
 package de.age.logtool.parsing;
 
+import de.age.logtool.LogEntry;
+
 public interface LogEventListener {
 	
-	void logEvent(long time, String content);
+	void logEvent(LogEntry event);
 
 }

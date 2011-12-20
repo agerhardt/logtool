@@ -3,6 +3,8 @@ package de.age.logtool.parsing;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.age.logtool.LogEntry;
+
 public abstract class AbstractLogParser implements LogParser {
 	
 	private List<LogEventListener> listeners;
@@ -21,9 +23,9 @@ public abstract class AbstractLogParser implements LogParser {
 		listeners.remove(l);
 	}
 
-	protected void fireLogEvent(long currentTimeMillis, String input) {
+	protected void fireLogEvent(LogEntry event) {
 		for (LogEventListener l : listeners) {
-			l.logEvent(currentTimeMillis, input);
+			l.logEvent(event);
 		}
 	}
 

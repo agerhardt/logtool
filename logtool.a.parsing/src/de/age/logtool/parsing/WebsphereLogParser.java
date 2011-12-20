@@ -5,6 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
 
+import de.age.logtool.LogContent;
+import de.age.logtool.LogEntry;
+import de.age.logtool.Timestamp;
+
 
 public class WebsphereLogParser extends AbstractLogParser {
 
@@ -36,7 +40,10 @@ public class WebsphereLogParser extends AbstractLogParser {
 		if (isInputWithTimestamp(buffer.toString())) {
 			try {
 				Date parse = FORMAT.parse(buffer.substring(1, 24));
-				fireLogEvent(parse.getTime(), buffer.toString());
+				Timestamp timestamp = new Timestamp(parse.getTime());
+				LogContent content = new LogContent(); // TODO
+				LogEntry event = new LogEntry(timestamp, content);
+				fireLogEvent(event);
 			} catch (ParseException e) {
 				// TODO
 				throw new RuntimeException();
