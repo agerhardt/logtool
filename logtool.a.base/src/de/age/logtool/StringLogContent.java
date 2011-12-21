@@ -26,4 +26,8 @@ public class StringLogContent implements LogContent {
 		return content.hashCode();
 	}
 
+	public String getString() {
+		return content;
+	}
+
 }

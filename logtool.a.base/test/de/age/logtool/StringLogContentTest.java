@@ -42,4 +42,11 @@ public class StringLogContentTest {
 		assertThat(content1.hashCode(), is(equalTo(content2.hashCode())));
 	}
 	
+	@Test
+	public void constructorArgumentIsReturned() {
+		String stringContent = "content";
+		StringLogContent content = new StringLogContent(stringContent);
+		assertThat(content.getString(), is(equalTo(stringContent)));
+	}
+	
 }
