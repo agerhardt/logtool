@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import de.age.logtool.LogContent;
 import de.age.logtool.LogEntry;
+import de.age.logtool.StringLogContent;
 import de.age.logtool.Timestamp;
 
 
@@ -41,7 +42,7 @@ public class WebsphereLogParser extends AbstractLogParser {
 			try {
 				Date parse = FORMAT.parse(buffer.substring(1, 24));
 				Timestamp timestamp = new Timestamp(parse.getTime());
-				LogContent content = new LogContent(); // TODO
+				LogContent content = new StringLogContent(buffer.substring(30));
 				LogEntry event = new LogEntry(timestamp, content);
 				fireLogEvent(event);
 			} catch (ParseException e) {
