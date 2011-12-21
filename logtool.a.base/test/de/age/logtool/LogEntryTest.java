@@ -15,13 +15,13 @@ public class LogEntryTest {
 
 	@Test(expected = IllegalTimestampException.class)
 	public void constructorNullTimestampThrowsException() {
-		new LogEntry(null, new LogContent());
+		new LogEntry(null, content("content"));
 	}
 	
 	@Test
 	public void constructorNullTimestampExceptionMessage() {
 		try {
-			new LogEntry(null, new LogContent());
+			new LogEntry(null, content("content"));
 		} catch (IllegalTimestampException exc) {
 			assertThat(exc.getMessage(), is(equalTo("Timestamp must not be <null>")));
 		}
@@ -44,7 +44,7 @@ public class LogEntryTest {
 	@Test
 	public void timestampGetsReturned() {
 		Timestamp ts = Timestamp.current();
-		LogContent content = new LogContent();
+		LogContent content = content("content");
 		LogEntry entry = new LogEntry(ts, content);
 		assertThat(entry.getTimestamp(), is(sameInstance(ts)));
 	}
@@ -52,7 +52,7 @@ public class LogEntryTest {
 	@Test
 	public void contentGetsReturned() {
 		Timestamp ts = Timestamp.current();
-		LogContent content = new LogContent();
+		LogContent content = content("content");
 		LogEntry entry = new LogEntry(ts, content);
 		assertThat(entry.getContent(), is(sameInstance(content)));
 	}
@@ -60,7 +60,7 @@ public class LogEntryTest {
 	@Test
 	public void entriesWithSameTimestampAndContentAreEqual() {
 		Timestamp ts = Timestamp.current();
-		LogContent content = new LogContent();
+		LogContent content = content("content");
 		LogEntry entry1 = new LogEntry(ts, content);
 		LogEntry entry2 = new LogEntry(ts, content);
 		assertThat(entry1, is(equalTo(entry2)));
@@ -70,8 +70,8 @@ public class LogEntryTest {
 	public void entriesWithEqualTimestampAndContentAreEqual() {
 		Timestamp ts1 = new Timestamp(100);
 		Timestamp ts2 = new Timestamp(100);
-		LogContent content1 = new LogContent();
-		LogContent content2 = content1; // TODO
+		LogContent content1 = content("content");
+		LogContent content2 = content("content");
 		LogEntry entry1 = new LogEntry(ts1, content1);
 		LogEntry entry2 = new LogEntry(ts2, content2);
 		assertThat(entry1, is(equalTo(entry2)));
@@ -81,7 +81,7 @@ public class LogEntryTest {
 	public void entriesWithDifferentTimestampsAreNotEqual() {
 		Timestamp ts1 = new Timestamp(100);
 		Timestamp ts2 = new Timestamp(200);
-		LogContent content = new LogContent();
+		LogContent content = content("content");
 		LogEntry entry1 = new LogEntry(ts1, content);
 		LogEntry entry2 = new LogEntry(ts2, content);
 		assertThat(entry1, is(not(equalTo(entry2))));
@@ -90,8 +90,8 @@ public class LogEntryTest {
 	@Test
 	public void entriesWithDifferentContentAreNotEqual() {
 		Timestamp ts = Timestamp.current();
-		LogContent content1 = new LogContent();
-		LogContent content2 = new LogContent();
+		LogContent content1 = content("content1");
+		LogContent content2 = content("content2");
 		LogEntry entry1 = new LogEntry(ts, content1);
 		LogEntry entry2 = new LogEntry(ts, content2);
 		assertThat(entry1, is(not(equalTo(entry2))));
@@ -101,11 +101,15 @@ public class LogEntryTest {
 	public void equalEntriesHaveSameHashcode() {
 		Timestamp ts1 = new Timestamp(100);
 		Timestamp ts2 = new Timestamp(100);
-		LogContent content1 = new LogContent();
-		LogContent content2 = content1; // TODO
+		LogContent content1 = content("content");
+		LogContent content2 = content("content");
 		LogEntry entry1 = new LogEntry(ts1, content1);
 		LogEntry entry2 = new LogEntry(ts2, content2);
 		assertThat(entry1.hashCode(), is(equalTo(entry2.hashCode())));
+	}
+	
+	private static LogContent content(String s) {
+		return new StringLogContent(s);
 	}
 
 }
