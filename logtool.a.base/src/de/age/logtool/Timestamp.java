@@ -1,5 +1,8 @@
 package de.age.logtool;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 /**
  * The timestamp of a log. This can be the time denoted by the entry in the
  * logfile, or the time the line was read, if no timestamp is available in the
@@ -7,6 +10,8 @@ package de.age.logtool;
  */
 public class Timestamp implements Comparable<Timestamp> {
 
+	private static final DateFormat FORMAT = DateFormat.getDateTimeInstance();
+	
 	private final long timeInMillis;
 
 	public Timestamp(long timeInMillis) {
@@ -41,6 +46,16 @@ public class Timestamp implements Comparable<Timestamp> {
 		} else {
 			return 0;
 		}
+	}
+
+	@Override
+	public String toString() {
+		// TODO this method is not tested
+		return FORMAT.format(new Date(timeInMillis));
+	}
+	
+	public Date toDate() {
+		return new Date(timeInMillis);
 	}
 
 }

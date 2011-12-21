@@ -30,4 +30,9 @@ public class StringLogContent implements LogContent {
 		return content;
 	}
 
+	@Override
+	public String toString() {
+		return getString();
+	}
+
 }
