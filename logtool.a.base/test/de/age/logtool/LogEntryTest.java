@@ -108,6 +108,15 @@ public class LogEntryTest {
 		assertThat(entry1.hashCode(), is(equalTo(entry2.hashCode())));
 	}
 	
+	@Test
+	public void toStringReturnsCorrectFormat() {
+		Timestamp ts = Timestamp.current();
+		LogContent content = content("content");
+		LogEntry entry = new LogEntry(ts, content);
+		String toString = entry.toString();
+		assertThat(toString, is(equalTo("[" + ts.toString() + "] " + content.toString())));
+	}
+	
 	private static LogContent content(String s) {
 		return new StringLogContent(s);
 	}

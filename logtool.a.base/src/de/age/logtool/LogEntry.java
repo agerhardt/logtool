@@ -7,6 +7,9 @@ import de.age.logtool.exceptions.IllegalTimestampException;
  * A simple entry in a log, can be a simple line, or a more complex structure, like a trace or xml-dump.
  */
 public class LogEntry {
+	
+	private static final String TO_STRING_FORMAT = "[%1s] %2s";
+	
 	private final Timestamp timestamp;
 	private final LogContent content;
 
@@ -42,6 +45,11 @@ public class LogEntry {
 	@Override
 	public int hashCode() {
 		return (timestamp.hashCode() >>> 2) ^ content.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return String.format(TO_STRING_FORMAT, timestamp, content);
 	}
 	
 }
