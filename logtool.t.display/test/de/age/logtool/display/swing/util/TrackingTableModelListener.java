@@ -1,4 +1,4 @@
-package de.age.logtool.display.util;
+package de.age.logtool.display.swing.util;
 
 import java.util.ArrayList;
 import java.util.List;
