@@ -2,7 +2,11 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="lib" path="aopalliance.jar"/>
-	<classpathentry exported="true" kind="lib" path="guice-3.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="guice-3.0.jar" sourcepath="sources/guice-3.0-src.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/logtool.0.guicelib/sources/guice-3.0-src.zip!/guice-3.0-src/javadoc"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="javax.inject.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
