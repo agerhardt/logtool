@@ -1,5 +1,5 @@
 package de.age.logtool.display;
 
-public class DisplayLogEvent {
+public interface DisplayLogEvent {
 
 }

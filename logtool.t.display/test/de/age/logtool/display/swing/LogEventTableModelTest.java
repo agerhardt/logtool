@@ -3,12 +3,12 @@ package de.age.logtool.display.swing;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import de.age.logtool.display.DisplayLogEvent;
-import de.age.logtool.display.swing.LogEventTableModel;
 import de.age.logtool.display.swing.util.TrackingTableModelListener;
 
 public class LogEventTableModelTest {
@@ -30,7 +30,7 @@ public class LogEventTableModelTest {
 	
 	@Test
 	public void addingAnElementFiresEvent() {
-		model.addLogEvent(new DisplayLogEvent());
+		model.addLogEvent(EasyMock.createNiceMock(DisplayLogEvent.class));
 		assertThat(listener.getNumEvents(), is(1));
 	}
 	
