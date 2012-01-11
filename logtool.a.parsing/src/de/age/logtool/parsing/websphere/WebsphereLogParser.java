@@ -1,4 +1,4 @@
-package de.age.logtool.parsing;
+package de.age.logtool.parsing.websphere;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,9 +9,10 @@ import de.age.logtool.LogContent;
 import de.age.logtool.LogEntry;
 import de.age.logtool.StringLogContent;
 import de.age.logtool.Timestamp;
+import de.age.logtool.parsing.AbstractLogParser;
 
 
-public class WebsphereLogParser extends AbstractLogParser {
+class WebsphereLogParser extends AbstractLogParser {
 
 	private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss:SSS");
 	private static final Pattern PATTERN = Pattern.compile("\\[\\d{2}\\.\\d{2}\\.\\d{4} \\d{2}:\\d{2}:\\d{2}:\\d{3} CET\\].*");

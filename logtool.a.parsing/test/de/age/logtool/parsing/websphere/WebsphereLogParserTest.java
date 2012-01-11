@@ -1,4 +1,4 @@
-package de.age.logtool.parsing;
+package de.age.logtool.parsing.websphere;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -15,6 +15,7 @@ import de.age.logtool.LogEntry;
 import de.age.logtool.StringLogContent;
 import de.age.logtool.parsing.util.TrackingLogEventListener;
 import de.age.logtool.parsing.util.WebSphereLogCreator;
+import de.age.logtool.parsing.websphere.WebsphereLogParser;
 
 public class WebsphereLogParserTest {
 	

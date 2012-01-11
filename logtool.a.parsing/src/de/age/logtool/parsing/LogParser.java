@@ -1,10 +1,6 @@
 package de.age.logtool.parsing;
 
-public interface LogParser {
-	
-	void addLogEventListener(LogEventListener l);
-	
-	void removeLogEventListener(LogEventListener l);
+public interface LogParser extends LogEventSource {
 	
 	void parse(String input);
 
