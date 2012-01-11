@@ -2,6 +2,8 @@ package de.age.logtool.display;
 
 public interface ApplicationWindow {
 
-	public abstract void showWindow();
-
+	void showWindow();
+	
+	void registerOperations(FileOperations fileOps);
+	
 }

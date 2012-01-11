@@ -2,3 +2,7 @@ CDI:
     just for understanding this right ... i think the modules in CDI are not necessarily implemented client-side to kinda
     "piece together" the application, but might be better off in the modules (in a project sense) and wrap up basically everything
     this project/module does in a tight little package
+
+TODO @ CDI:
+    test if making ApplicationWindow an abstract-class with the operations as members (being assigned by Guice) will work out nicer,
+    subclasses would get access to those without having to register, but I dont know how to get the correct module in there

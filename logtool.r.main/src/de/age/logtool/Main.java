@@ -6,6 +6,7 @@ import com.google.inject.Injector;
 
 import de.age.logtool.display.ApplicationWindow;
 import de.age.logtool.display.swing.SwingApplicationModule;
+import de.age.logtool.operations.DefaultFileOperations;
 import de.age.logtool.parsing.LogParser;
 import de.age.logtool.parsing.websphere.WebsphereLogModule;
 
@@ -21,6 +22,7 @@ public class Main {
 	}
 	
 	public void start() {
+		window.registerOperations(new DefaultFileOperations());
 		window.showWindow();
 	}
 	

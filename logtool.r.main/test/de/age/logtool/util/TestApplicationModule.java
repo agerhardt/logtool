@@ -13,8 +13,8 @@ public class TestApplicationModule extends AbstractModule {
 	private final LogParser parser;
 	
 	public TestApplicationModule() {
-		window = EasyMock.createMock(ApplicationWindow.class);
-		parser = EasyMock.createMock(LogParser.class);
+		window = EasyMock.createNiceMock(ApplicationWindow.class);
+		parser = EasyMock.createNiceMock(LogParser.class);
 	}
 	
 	@Override

@@ -7,6 +7,7 @@ import org.junit.Test;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+import de.age.logtool.display.FileOperations;
 import de.age.logtool.util.TestApplicationModule;
 
 public class MainTest {
@@ -24,6 +25,14 @@ public class MainTest {
 	@Test
 	public void startingWillShowWindow() {
 		module.getWindow().showWindow();
+		EasyMock.replay(module.getWindow());
+		mainclass.start();
+		EasyMock.verify(module.getWindow());
+	}
+	
+	@Test
+	public void startingWillRegisterFileOperations() {
+		module.getWindow().registerOperations(EasyMock.notNull(FileOperations.class));
 		EasyMock.replay(module.getWindow());
 		mainclass.start();
 		EasyMock.verify(module.getWindow());
