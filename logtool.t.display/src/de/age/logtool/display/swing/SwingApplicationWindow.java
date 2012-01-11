@@ -7,6 +7,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
+import javax.swing.UIManager;
 
 import de.age.logtool.display.ApplicationWindow;
 import de.age.logtool.display.FileOperations;
@@ -19,9 +20,19 @@ class SwingApplicationWindow implements ApplicationWindow {
 	private JFrame window;
 	private FileOperations fileOps;
 	
-	SwingApplicationWindow() {
+	static {
+		setSystemLookAndFeel();
 	}
 	
+	private static void setSystemLookAndFeel() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+		}
+	}
+	
+	SwingApplicationWindow() {
+	}
 	protected JFrame getWindow() {
 		if (window == null) {
 			window = new JFrame();
