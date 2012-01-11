@@ -7,5 +7,6 @@
 	<classpathentry kind="src" path="testresources"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/logtool.0.testtools"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/logtool.a.base"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/logtool.0.guicelib"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
