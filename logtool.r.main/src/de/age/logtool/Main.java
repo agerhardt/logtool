@@ -6,14 +6,18 @@ import com.google.inject.Injector;
 
 import de.age.logtool.display.ApplicationWindow;
 import de.age.logtool.display.swing.SwingApplicationModule;
+import de.age.logtool.parsing.LogParser;
+import de.age.logtool.parsing.websphere.WebsphereLogModule;
 
 public class Main {
 
-	private ApplicationWindow window;
+	private final ApplicationWindow window;
+	private final LogParser logParser;
 	
 	@Inject
-	public Main(ApplicationWindow window) {
+	public Main(ApplicationWindow window, LogParser logParser) {
 		this.window = window;
+		this.logParser = logParser;
 	}
 	
 	public void start() {
@@ -21,7 +25,7 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
-		Injector injector = Guice.createInjector(new SwingApplicationModule());
+		Injector injector = Guice.createInjector(new SwingApplicationModule(), new WebsphereLogModule());
 		Main mainClass = injector.getInstance(Main.class);
 		mainClass.start();
 	}
