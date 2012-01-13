@@ -8,6 +8,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 import de.age.logtool.display.FileOperations;
+import de.age.logtool.display.SystemEvents;
 import de.age.logtool.util.TestApplicationModule;
 
 public class MainTest {
@@ -33,6 +34,14 @@ public class MainTest {
 	@Test
 	public void startingWillRegisterFileOperations() {
 		module.getWindow().registerOperations(EasyMock.notNull(FileOperations.class));
+		EasyMock.replay(module.getWindow());
+		mainclass.start();
+		EasyMock.verify(module.getWindow());
+	}
+	
+	@Test
+	public void startingWillRegisterSystemEvents() {
+		module.getWindow().registerSystemEvents(EasyMock.notNull(SystemEvents.class));
 		EasyMock.replay(module.getWindow());
 		mainclass.start();
 		EasyMock.verify(module.getWindow());

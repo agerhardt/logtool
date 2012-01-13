@@ -6,4 +6,6 @@ public interface ApplicationWindow {
 	
 	void registerOperations(FileOperations fileOps);
 	
+	void registerSystemEvents(SystemEvents events);
+	
 }

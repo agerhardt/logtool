@@ -11,6 +11,7 @@ import javax.swing.UIManager;
 
 import de.age.logtool.display.ApplicationWindow;
 import de.age.logtool.display.FileOperations;
+import de.age.logtool.display.SystemEvents;
 
 /**
  * Controller for the main application window
@@ -19,6 +20,7 @@ class SwingApplicationWindow implements ApplicationWindow {
 	
 	private JFrame window;
 	private FileOperations fileOps;
+	private SystemEvents systemEvents;
 	
 	static {
 		setSystemLookAndFeel();
@@ -66,6 +68,11 @@ class SwingApplicationWindow implements ApplicationWindow {
 	@Override
 	public void registerOperations(FileOperations fileOps) {
 		this.fileOps = fileOps;
+	}
+
+	@Override
+	public void registerSystemEvents(SystemEvents events) {
+		this.systemEvents = events;
 	}
 
 }
