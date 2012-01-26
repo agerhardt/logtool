@@ -1,4 +1,4 @@
-package de.age.logtool.display.swing;
+package de.age.logtool.swing;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;

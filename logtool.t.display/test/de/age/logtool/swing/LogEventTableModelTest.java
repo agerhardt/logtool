@@ -1,4 +1,4 @@
-package de.age.logtool.display.swing;
+package de.age.logtool.swing;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -9,7 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.age.logtool.display.DisplayLogEvent;
-import de.age.logtool.display.swing.util.TrackingTableModelListener;
+import de.age.logtool.swing.LogEventTableModel;
+import de.age.logtool.swing.util.TrackingTableModelListener;
 
 public class LogEventTableModelTest {
 

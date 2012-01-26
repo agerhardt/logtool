@@ -1,4 +1,4 @@
-package de.age.logtool.display.swing;
+package de.age.logtool.swing;
 
 import com.google.inject.AbstractModule;
 
