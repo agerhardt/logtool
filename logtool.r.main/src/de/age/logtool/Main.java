@@ -5,11 +5,11 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 import de.age.logtool.display.ApplicationWindow;
-import de.age.logtool.display.swing.SwingApplicationModule;
 import de.age.logtool.operations.DefaultFileOperations;
 import de.age.logtool.operations.DefaultSystemEvents;
 import de.age.logtool.parsing.LogParser;
 import de.age.logtool.parsing.websphere.WebsphereLogModule;
+import de.age.logtool.swing.SwingApplicationModule;
 
 public class Main {
 

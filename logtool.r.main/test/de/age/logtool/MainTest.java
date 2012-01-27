@@ -25,6 +25,7 @@ public class MainTest {
 	
 	@Test
 	public void startingWillShowWindow() {
+		module.resetToNice();
 		module.getWindow().showWindow();
 		EasyMock.replay(module.getWindow());
 		mainclass.start();
@@ -33,6 +34,7 @@ public class MainTest {
 	
 	@Test
 	public void startingWillRegisterFileOperations() {
+		module.resetToNice();
 		module.getWindow().registerOperations(EasyMock.notNull(FileOperations.class));
 		EasyMock.replay(module.getWindow());
 		mainclass.start();
@@ -41,6 +43,7 @@ public class MainTest {
 	
 	@Test
 	public void startingWillRegisterSystemEvents() {
+		module.resetToNice();
 		module.getWindow().registerSystemEvents(EasyMock.notNull(SystemEvents.class));
 		EasyMock.replay(module.getWindow());
 		mainclass.start();

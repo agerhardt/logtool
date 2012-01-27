@@ -30,5 +30,9 @@ public class TestApplicationModule extends AbstractModule {
 	public LogParser getParser() {
 		return parser;
 	}
+	
+	public void resetToNice() {
+		EasyMock.resetToNice(window, parser);
+	}
 
 }
