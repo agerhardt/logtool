@@ -9,18 +9,12 @@ import javax.swing.JFrame;
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
 
-import de.age.logtool.display.ApplicationWindow;
-import de.age.logtool.display.FileOperations;
-import de.age.logtool.display.SystemEvents;
-
 /**
  * Controller for the main application window
  */
-class SwingApplicationWindow implements ApplicationWindow {
+public class SwingMainWindow {
 	
 	private JFrame window;
-	private FileOperations fileOps;
-	private SystemEvents systemEvents;
 	
 	static {
 		setSystemLookAndFeel();
@@ -33,7 +27,7 @@ class SwingApplicationWindow implements ApplicationWindow {
 		}
 	}
 	
-	SwingApplicationWindow() {
+	SwingMainWindow() {
 	}
 	protected JFrame getWindow() {
 		if (window == null) {
@@ -53,26 +47,15 @@ class SwingApplicationWindow implements ApplicationWindow {
 			public void actionPerformed(ActionEvent e) {
 				JFileChooser chooser = new JFileChooser();
 				if (chooser.showOpenDialog(window) == JFileChooser.APPROVE_OPTION) {
-					fileOps.open(chooser.getSelectedFile().getAbsolutePath());
+//					fileOps.open(chooser.getSelectedFile().getAbsolutePath());
 				}
 			}
 		});
 		return toolbar;
 	}
 
-	@Override
 	public void showWindow() {
 		getWindow().setVisible(true);
-	}
-
-	@Override
-	public void registerOperations(FileOperations fileOps) {
-		this.fileOps = fileOps;
-	}
-
-	@Override
-	public void registerSystemEvents(SystemEvents events) {
-		this.systemEvents = events;
 	}
 
 }
