@@ -7,8 +7,6 @@ import org.junit.Test;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import de.age.logtool.display.FileOperations;
-import de.age.logtool.display.SystemEvents;
 import de.age.logtool.util.TestApplicationModule;
 
 public class MainTest {

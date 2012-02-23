@@ -4,27 +4,27 @@ import org.easymock.EasyMock;
 
 import com.google.inject.AbstractModule;
 
-import de.age.logtool.display.ApplicationWindow;
+import de.age.logtool.LogtoolApplication;
 import de.age.logtool.parsing.LogParser;
 
 public class TestApplicationModule extends AbstractModule {
 
-	private final ApplicationWindow window;
+	private final LogtoolApplication application;
 	private final LogParser parser;
 	
 	public TestApplicationModule() {
-		window = EasyMock.createNiceMock(ApplicationWindow.class);
+		application = EasyMock.createNiceMock(LogtoolApplication.class);
 		parser = EasyMock.createNiceMock(LogParser.class);
 	}
 	
 	@Override
 	protected void configure() {
-		bind(ApplicationWindow.class).toInstance(window);
+		bind(LogtoolApplication.class).toInstance(application);
 		bind(LogParser.class).toInstance(parser);
 	}
 
-	public ApplicationWindow getWindow() {
-		return window;
+	public LogtoolApplication getWindow() {
+		return application;
 	}
 	
 	public LogParser getParser() {
@@ -32,7 +32,7 @@ public class TestApplicationModule extends AbstractModule {
 	}
 	
 	public void resetToNice() {
-		EasyMock.resetToNice(window, parser);
+		EasyMock.resetToNice(application, parser);
 	}
 
 }
