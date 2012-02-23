@@ -1,4 +1,5 @@
-package de.age.logtool.display;
+package de.age.logtool;
+
 
 public interface ApplicationWindow {
 

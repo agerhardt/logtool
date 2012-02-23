@@ -1,4 +1,6 @@
-package de.age.logtool.display;
+package de.age.logtool;
+
+import de.age.logtool.display.LogEventListener;
 
 /**
  * Interface for registering listeners to system-initiated events.
