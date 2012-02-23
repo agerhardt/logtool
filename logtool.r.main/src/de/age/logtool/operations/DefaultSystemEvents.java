@@ -3,9 +3,9 @@ package de.age.logtool.operations;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.age.logtool.SystemEvents;
 import de.age.logtool.display.DisplayLogEvent;
 import de.age.logtool.display.LogEventListener;
-import de.age.logtool.display.SystemEvents;
 
 public class DefaultSystemEvents implements SystemEvents {
 
