@@ -1,4 +1,4 @@
-package de.age.logtool.parsing.util;
+package de.age.logtool.parsing.websphere;
 
 import java.util.Random;
 

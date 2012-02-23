@@ -14,7 +14,6 @@ import de.age.logtool.LogContent;
 import de.age.logtool.LogEntry;
 import de.age.logtool.StringLogContent;
 import de.age.logtool.parsing.util.TrackingLogEventListener;
-import de.age.logtool.parsing.util.WebSphereLogCreator;
 import de.age.logtool.parsing.websphere.WebsphereLogParser;
 
 public class WebsphereLogParserTest {

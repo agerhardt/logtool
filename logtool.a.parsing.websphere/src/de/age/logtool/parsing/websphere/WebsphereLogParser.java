@@ -9,17 +9,21 @@ import de.age.logtool.LogContent;
 import de.age.logtool.LogEntry;
 import de.age.logtool.StringLogContent;
 import de.age.logtool.Timestamp;
-import de.age.logtool.parsing.AbstractLogParser;
+import de.age.logtool.parsing.LogEventListener;
+import de.age.logtool.parsing.LogParser;
+import de.age.logtool.parsing.util.LogListenerList;
 
 
-class WebsphereLogParser extends AbstractLogParser {
+class WebsphereLogParser implements LogParser {
 
 	private static final SimpleDateFormat FORMAT = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss:SSS");
 	private static final Pattern PATTERN = Pattern.compile("\\[\\d{2}\\.\\d{2}\\.\\d{4} \\d{2}:\\d{2}:\\d{2}:\\d{3} CET\\].*");
 	private StringBuilder buffer;
+	private final LogListenerList listeners;
 	
 	public WebsphereLogParser() {
 		buffer = new StringBuilder();
+		listeners = new LogListenerList();
 	}
 	
 	@Override
@@ -45,13 +49,23 @@ class WebsphereLogParser extends AbstractLogParser {
 				Timestamp timestamp = new Timestamp(parse.getTime());
 				LogContent content = new StringLogContent(buffer.substring(30));
 				LogEntry event = new LogEntry(timestamp, content);
-				fireLogEvent(event);
+				listeners.fireLogEvent(event);
 			} catch (ParseException e) {
 				// TODO
 				throw new RuntimeException();
 			}
 		}
 		buffer = new StringBuilder();
+	}
+
+	@Override
+	public void addLogEventListener(LogEventListener l) {
+		listeners.addLogEventListener(l);
+	}
+
+	@Override
+	public void removeLogEventListener(LogEventListener l) {
+		listeners.removeLogEventListener(l);
 	}
 
 }
