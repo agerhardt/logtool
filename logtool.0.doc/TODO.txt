@@ -1,8 +1,9 @@
-CDI:
-    just for understanding this right ... i think the modules in CDI are not necessarily implemented client-side to kinda
-    "piece together" the application, but might be better off in the modules (in a project sense) and wrap up basically everything
-    this project/module does in a tight little package
-
-TODO @ CDI:
-    test if making ApplicationWindow an abstract-class with the operations as members (being assigned by Guice) will work out nicer,
-    subclasses would get access to those without having to register, but I dont know how to get the correct module in there
+arch:
+    dunno if having the "r.main" is actually necessary "r.swingintegration" has access to all the business-classes, 
+    so i dont actually need to abstract the gui-interaction.
+    i should focus on getting that done for now
+    
+logging:
+    - i need to be able to merge logs, do some foundation for that
+    - what do i call such a "superlog" that is a composite of multiple underlying ones ?
+    
