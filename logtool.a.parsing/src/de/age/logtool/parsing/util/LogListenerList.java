@@ -1,29 +1,32 @@
-package de.age.logtool.parsing;
+package de.age.logtool.parsing.util;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.age.logtool.LogEntry;
+import de.age.logtool.parsing.LogEventListener;
+import de.age.logtool.parsing.LogEventSource;
 
-public abstract class AbstractLogParser implements LogParser {
-	
+/**
+ * Helper class for handling the listener methods of {@link LogEventSource}
+ */
+public class LogListenerList {
+
 	private List<LogEventListener> listeners;
 	
-	public AbstractLogParser() {
+	public LogListenerList() {
 		listeners = new ArrayList<LogEventListener>();
 	}
 	
-	@Override
 	public void addLogEventListener(LogEventListener l) {
 		listeners.add(l);
 	}
 
-	@Override
 	public void removeLogEventListener(LogEventListener l) {
 		listeners.remove(l);
 	}
 
-	protected void fireLogEvent(LogEntry event) {
+	public void fireLogEvent(LogEntry event) {
 		for (LogEventListener l : listeners) {
 			l.logEvent(event);
 		}
