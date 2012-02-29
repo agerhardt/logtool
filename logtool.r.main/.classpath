@@ -9,7 +9,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/logtool.a.base"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/logtool.a.parsing"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/logtool.r.swingintegration"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/logtool.r.userinteraction"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/logtool.a.parsing.websphere"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/logtool.r.userinteraction"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
